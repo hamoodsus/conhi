@@ -26,10 +26,10 @@ header{max-width:1100px;margin:0 auto 20px;text-align:center;color:#fff}.eyebrow
 <header id="header"><div class="eyebrow">HOẠT ĐỘNG TƯƠNG TÁC TRÊN LỚP</div><h1>QUÉT MÃ QR – CÂU HỎI HIỆN TRÊN MÀN CHIẾU</h1><p>Học sinh quét một mã → câu hỏi xuất hiện trên máy chiếu → mã vừa quét tự biến mất.</p><span id="status">Đang kết nối…</span></header>
 <main class="wrap" id="board">
  <section class="qr-grid" id="qrGrid">
-  <article class="qr-card blue" id="card-CH1"><h2>🔵 CÂU HỎI 1</h2><p>Luận đề của văn bản</p><div class="qr" id="qr-CH1"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 1</p></article>
-  <article class="qr-card purple" id="card-CH2"><h2>🟣 CÂU HỎI 2</h2><p>Luận đề – luận điểm</p><div class="qr" id="qr-CH2"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 2</p></article>
-  <article class="qr-card green" id="card-CH3"><h2>🟢 CÂU HỎI 3</h2><p>Lí lẽ của tác giả</p><div class="qr" id="qr-CH3"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 3</p></article>
-  <article class="qr-card orange" id="card-CH4"><h2>🟠 CÂU HỎI 4</h2><p>Bằng chứng của tác giả</p><div class="qr" id="qr-CH4"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 4</p></article>
+  <article class="qr-card blue" id="card-CH1"><h2>🔵 CÂU HỎI 1</h2><div class="qr" id="qr-CH1"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 1</p></article>
+  <article class="qr-card purple" id="card-CH2"><h2>🟣 CÂU HỎI 2</h2><div class="qr" id="qr-CH2"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 2</p></article>
+  <article class="qr-card green" id="card-CH3"><h2>🟢 CÂU HỎI 3</h2><div class="qr" id="qr-CH3"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 3</p></article>
+  <article class="qr-card orange" id="card-CH4"><h2>🟠 CÂU HỎI 4</h2><div class="qr" id="qr-CH4"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 4</p></article>
  </section>
  <section id="projectorQuestion"><div id="qSymbol"></div><div id="qLabel"></div><h2 id="qMain"></h2><div id="qSub"></div></section>
  <div class="controls"><span class="room">Mã phòng: <b id="roomLabel">DEMO</b></span><button class="reset" id="resetBtn">↻ BẮT ĐẦU LƯỢT MỚI – HIỆN LẠI 4 QR</button></div>
@@ -40,14 +40,14 @@ header{max-width:1100px;margin:0 auto 20px;text-align:center;color:#fff}.eyebrow
 const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzvMKWQb5JRipWXv6g1fOBx-1bMsH-D7HB9ogpZPRXIFQKjFPbKWorVSRlAmQLDZAY/exec";
 const ROOM="DEMO";
 const QUESTIONS=[
-{id:"CH1",title:"CÂU HỎI 1",main:"Xác định luận đề của văn bản?",sub:"Khi bàn về năng lực sáng tạo của con người, tác giả đã triển khai những luận điểm nào?",color:"#2563eb",symbol:"🔵"},
-{id:"CH2",title:"CÂU HỎI 2",main:"Nhận xét về mối quan hệ giữa luận đề - luận điểm;",sub:"Mối quan hệ giữa các luận điểm được tác giả triển khai trong bài viết như thế nào?",color:"#9333ea",symbol:"🟣"},
-{id:"CH3",title:"CÂU HỎI 3",main:"Nhận xét về cách sử dụng lí lẽ của tác giả được thể hiện trong văn bản?",sub:"",color:"#059669",symbol:"🟢"},
-{id:"CH4",title:"CÂU HỎI 4",main:"Nhận xét về cách sử dụng bằng chứng của tác giả được thể hiện trong văn bản?",sub:"Việc trích dẫn các câu nói của một số nhà khoa học nổi tiếng có phải là một cách nêu bằng chứng không? Vì sao?",color:"#ea580c",symbol:"🟠"}
+{id:"CH1",title:"CÂU HỎI 1",main:"Xác định luận đề của văn bản?",sub:"Theo bạn, luận đề của văn bản có được thể hiện ở nhan đề không?",color:"#2563eb",symbol:"🔵"},
+{id:"CH2",title:"CÂU HỎI 2",main:"Khi bàn về năng lực sáng tạo của con người, tác giả đã triển khai những luận điểm nào?",sub:"Nêu mối quan hệ giữa các luận điểm đó.",color:"#9333ea",symbol:"🟣"},
+{id:"CH3",title:"CÂU HỎI 3",main:"Chỉ ra các lí lẽ, bằng chứng của tác giả được thể hiện trong văn bản?",sub:"(Luận điểm 1, 2)",color:"#059669",symbol:"🟢"},
+{id:"CH4",title:"CÂU HỎI 4",main:"Chỉ ra các lí lẽ, bằng chứng của tác giả được thể hiện trong văn bản?",sub:"(Luận điểm 3, 4, 5)",color:"#ea580c",symbol:"🟠"}
 ];
 const params=new URLSearchParams(location.search);
 const scanId=params.get("scan");
-let lastDrawId=-1,requestBusy=false;
+let lastDrawId=-1,requestBusy=false,baselineReady=false,baselineDrawId=null;
 function api(params,done){
  if(!WEB_APP_URL.startsWith("https://script.google.com/")){done({ok:false,error:"Chưa cấu hình URL Apps Script"});return;}
  const cb="qr_cb_"+Date.now()+"_"+Math.floor(Math.random()*100000);
@@ -62,6 +62,22 @@ function render(state){
  document.getElementById("status").textContent="Đã kết nối · "+ROOM+" · Đã quét "+(state.drawn||[]).length+"/4";
  QUESTIONS.forEach(q=>document.getElementById("card-"+q.id).classList.toggle("used",(state.drawn||[]).includes(q.id)));
  const panel=document.getElementById("projectorQuestion");
+
+ // Khi vừa mở bảng QR, ghi nhận trạng thái cũ và ẩn câu hỏi cũ.
+ if(!baselineReady){
+  baselineDrawId=state.drawId;
+  baselineReady=true;
+  panel.classList.remove("show");
+  lastDrawId=state.drawId||0;
+  return;
+ }
+
+ // Chỉ hiện câu hỏi khi có lượt quét mới sau khi mở bảng QR.
+ if(state.drawId===baselineDrawId){
+  panel.classList.remove("show");
+  return;
+ }
+
  const q=QUESTIONS.find(x=>x.id===state.currentId);
  if(q){
   panel.classList.add("show");panel.style.borderColor=q.color;
@@ -98,7 +114,7 @@ function handleScan(){
 document.getElementById("roomLabel").textContent=ROOM;
 document.getElementById("resetBtn").onclick=()=>{
  if(confirm("Bắt đầu lượt mới và hiện lại cả 4 mã QR?")){
-  api({action:"reset",room:ROOM},data=>{if(data.ok&&data.state)render(data.state);});
+  api({action:"reset",room:ROOM},data=>{if(data.ok&&data.state){baselineDrawId=data.state.drawId;baselineReady=true;document.getElementById("projectorQuestion").classList.remove("show");render(data.state);}});
  }
 };
 if(scanId){handleScan();}
