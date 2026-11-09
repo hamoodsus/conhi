@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4 mã QR – Câu hỏi trên màn chiếu</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;padding:22px;font-family:Lexend,Arial,sans-serif;color:#172033;min-height:100vh;background:linear-gradient(135deg,#0f172a,#312e81 55%,#164e63)}
+header{max-width:1100px;margin:0 auto 20px;text-align:center;color:#fff}.eyebrow{font-size:12px;letter-spacing:.18em;color:#c7d2fe;font-weight:800}header h1{font-size:clamp(25px,4vw,42px);margin:8px 0}header p{color:#dbeafe;font-size:14px}
+#status{display:inline-block;background:#ffffff20;border:1px solid #ffffff35;border-radius:99px;padding:7px 13px;font-size:12px;color:white}
+.wrap{max-width:1100px;margin:auto}.qr-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.qr-card{border:3px solid;border-radius:22px;padding:17px 10px;text-align:center;box-shadow:0 14px 35px #0003;transition:.2s}
+.qr-card h2{font-size:17px;margin:0 0 5px}.qr-card p{font-size:12px;margin:0}.qr{background:#fff;border-radius:14px;width:170px;height:170px;margin:14px auto;padding:7px;display:flex;align-items:center;justify-content:center}
+.qr img{max-width:100%;height:auto}.blue{background:linear-gradient(145deg,#dbeafe,#eff6ff);border-color:#60a5fa;color:#1e40af}.purple{background:linear-gradient(145deg,#f3e8ff,#faf5ff);border-color:#c084fc;color:#6b21a8}.green{background:linear-gradient(145deg,#d1fae5,#ecfdf5);border-color:#6ee7b7;color:#065f46}.orange{background:linear-gradient(145deg,#ffedd5,#fff7ed);border-color:#fdba74;color:#9a3412}
+.qr-card.used{opacity:.28;filter:grayscale(1);transform:scale(.97)}.qr-card.used .qr{visibility:hidden}.used-label{display:none;font-weight:800;margin:18px 0 24px}.qr-card.used .used-label{display:block}
+.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}.controls button{border:0;border-radius:12px;padding:12px 18px;font:700 14px Lexend;cursor:pointer}.reset{background:#fbbf24;color:#422006}.room{background:#fff;color:#172033;padding:10px 12px;border-radius:12px;font-size:13px}
+#projectorQuestion{display:none;background:#fff;border-radius:28px;padding:clamp(25px,5vw,55px);margin:20px auto;max-width:950px;text-align:center;box-shadow:0 20px 55px #0004;border:7px solid #6366f1}
+#projectorQuestion.show{display:block}#qSymbol{font-size:42px}#qLabel{font-weight:800;letter-spacing:.16em;color:#4f46e5;font-size:14px}#qMain{font:700 clamp(28px,4vw,48px)/1.25 "Playfair Display",serif;margin:18px 0}#qSub{font-size:clamp(16px,2vw,22px);line-height:1.6;color:#334155}
+.scan-page{max-width:550px;margin:8vh auto;background:#fff;border-radius:25px;padding:30px;text-align:center;box-shadow:0 20px 55px #0004}.scan-page h1{font-size:25px}.scan-page p{line-height:1.6;color:#475569}
+.hidden{display:none!important}.footnote{text-align:center;color:#dbeafe;font-size:12px;margin-top:16px}
+@media(max-width:850px){.qr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:430px){body{padding:12px}.qr-card{padding:12px 5px}.qr{width:135px;height:135px}.qr-card h2{font-size:15px}}
+</style>
+</head>
+<body>
+<header id="header"><div class="eyebrow">HOẠT ĐỘNG TƯƠNG TÁC TRÊN LỚP</div><h1>QUÉT MÃ QR – CÂU HỎI HIỆN TRÊN MÀN CHIẾU</h1><p>Học sinh quét một mã → câu hỏi xuất hiện trên máy chiếu → mã vừa quét tự biến mất.</p><span id="status">Đang kết nối…</span></header>
+<main class="wrap" id="board">
+ <section class="qr-grid" id="qrGrid">
+  <article class="qr-card blue" id="card-CH1"><h2>🔵 CÂU HỎI 1</h2><p>Luận đề của văn bản</p><div class="qr" id="qr-CH1"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 1</p></article>
+  <article class="qr-card purple" id="card-CH2"><h2>🟣 CÂU HỎI 2</h2><p>Luận đề – luận điểm</p><div class="qr" id="qr-CH2"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 2</p></article>
+  <article class="qr-card green" id="card-CH3"><h2>🟢 CÂU HỎI 3</h2><p>Lí lẽ của tác giả</p><div class="qr" id="qr-CH3"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 3</p></article>
+  <article class="qr-card orange" id="card-CH4"><h2>🟠 CÂU HỎI 4</h2><p>Bằng chứng của tác giả</p><div class="qr" id="qr-CH4"></div><div class="used-label">✓ ĐÃ ĐƯỢC QUÉT</div><p>Quét để mở câu hỏi 4</p></article>
+ </section>
+ <section id="projectorQuestion"><div id="qSymbol"></div><div id="qLabel"></div><h2 id="qMain"></h2><div id="qSub"></div></section>
+ <div class="controls"><span class="room">Mã phòng: <b id="roomLabel">DEMO</b></span><button class="reset" id="resetBtn">↻ BẮT ĐẦU LƯỢT MỚI – HIỆN LẠI 4 QR</button></div>
+</main>
+<section id="scanPage" class="scan-page hidden"><div style="font-size:48px">📲</div><h1 id="scanTitle">Đang gửi lựa chọn…</h1><p id="scanMessage">Vui lòng chờ trong giây lát.</p></section>
+<p class="footnote" id="footnote">Máy chiếu cần mở trang bảng QR này liên tục để nhận câu hỏi mới.</p>
+<script>
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzvMKWQb5JRipWXv6g1fOBx-1bMsH-D7HB9ogpZPRXIFQKjFPbKWorVSRlAmQLDZAY/exec";
+const ROOM="DEMO";
+const QUESTIONS=[
+{id:"CH1",title:"CÂU HỎI 1",main:"Xác định luận đề của văn bản?",sub:"Khi bàn về năng lực sáng tạo của con người, tác giả đã triển khai những luận điểm nào?",color:"#2563eb",symbol:"🔵"},
+{id:"CH2",title:"CÂU HỎI 2",main:"Nhận xét về mối quan hệ giữa luận đề - luận điểm;",sub:"Mối quan hệ giữa các luận điểm được tác giả triển khai trong bài viết như thế nào?",color:"#9333ea",symbol:"🟣"},
+{id:"CH3",title:"CÂU HỎI 3",main:"Nhận xét về cách sử dụng lí lẽ của tác giả được thể hiện trong văn bản?",sub:"",color:"#059669",symbol:"🟢"},
+{id:"CH4",title:"CÂU HỎI 4",main:"Nhận xét về cách sử dụng bằng chứng của tác giả được thể hiện trong văn bản?",sub:"Việc trích dẫn các câu nói của một số nhà khoa học nổi tiếng có phải là một cách nêu bằng chứng không? Vì sao?",color:"#ea580c",symbol:"🟠"}
+];
+const params=new URLSearchParams(location.search);
+const scanId=params.get("scan");
+let lastDrawId=-1,requestBusy=false;
+function api(params,done){
+ if(!WEB_APP_URL.startsWith("https://script.google.com/")){done({ok:false,error:"Chưa cấu hình URL Apps Script"});return;}
+ const cb="qr_cb_"+Date.now()+"_"+Math.floor(Math.random()*100000);
+ window[cb]=data=>{delete window[cb];done(data);};
+ const s=document.createElement("script");
+ s.src=WEB_APP_URL+"?"+new URLSearchParams({...params,callback:cb}).toString();
+ s.onerror=()=>{delete window[cb];done({ok:false,error:"Không kết nối được máy chủ"});};
+ document.body.appendChild(s);
+ s.onload=()=>s.remove();
+}
+function render(state){
+ document.getElementById("status").textContent="Đã kết nối · "+ROOM+" · Đã quét "+(state.drawn||[]).length+"/4";
+ QUESTIONS.forEach(q=>document.getElementById("card-"+q.id).classList.toggle("used",(state.drawn||[]).includes(q.id)));
+ const panel=document.getElementById("projectorQuestion");
+ const q=QUESTIONS.find(x=>x.id===state.currentId);
+ if(q){
+  panel.classList.add("show");panel.style.borderColor=q.color;
+  document.getElementById("qSymbol").textContent=q.symbol;
+  document.getElementById("qLabel").textContent=q.title;
+  document.getElementById("qLabel").style.color=q.color;
+  document.getElementById("qMain").textContent=q.main;
+  document.getElementById("qSub").textContent=q.sub;
+  if(state.drawId!==lastDrawId){lastDrawId=state.drawId;panel.scrollIntoView({behavior:"smooth",block:"center"});}
+ }else{panel.classList.remove("show");lastDrawId=state.drawId||0;}
+}
+function poll(){if(requestBusy||scanId)return;requestBusy=true;api({room:ROOM},data=>{requestBusy=false;if(data.ok&&data.state)render(data.state);});}
+function createQRs(){
+ const base=location.href.split("?")[0].split("#")[0];
+ QUESTIONS.forEach(q=>{
+  const url=base+"?scan="+encodeURIComponent(q.id)+"&room="+encodeURIComponent(ROOM);
+  new QRCode(document.getElementById("qr-"+q.id),{text:url,width:155,height:155,correctLevel:QRCode.CorrectLevel.H});
+ });
+}
+function handleScan(){
+ document.getElementById("header").classList.add("hidden");
+ document.getElementById("board").classList.add("hidden");
+ document.getElementById("footnote").classList.add("hidden");
+ document.getElementById("scanPage").classList.remove("hidden");
+ const q=QUESTIONS.find(x=>x.id===scanId);
+ if(!q){document.getElementById("scanTitle").textContent="Mã QR không hợp lệ";return;}
+ document.getElementById("scanTitle").textContent="Đã chọn "+q.title;
+ document.getElementById("scanMessage").textContent="Đang gửi câu hỏi lên màn hình chiếu của giáo viên…";
+ api({action:"select",id:q.id,room:params.get("room")||ROOM},data=>{
+  document.getElementById("scanMessage").textContent=data.ok?(data.alreadyDrawn?"Mã này đã được sử dụng. Hãy quét một mã khác.":"Thành công! Câu hỏi đã được gửi lên màn hình chiếu."):("Không gửi được: "+(data.error||"Lỗi kết nối"));
+  document.getElementById("scanTitle").textContent=data.ok?(data.alreadyDrawn?"Mã đã được sử dụng":"Đã gửi câu hỏi!"):"Chưa gửi được câu hỏi";
+ });
+}
+document.getElementById("roomLabel").textContent=ROOM;
+document.getElementById("resetBtn").onclick=()=>{
+ if(confirm("Bắt đầu lượt mới và hiện lại cả 4 mã QR?")){
+  api({action:"reset",room:ROOM},data=>{if(data.ok&&data.state)render(data.state);});
+ }
+};
+if(scanId){handleScan();}
+else{
+ createQRs();poll();setInterval(poll,1500);
+}
+</script>
+</body></html>
