@@ -20,6 +20,266 @@ header{max-width:1100px;margin:0 auto 20px;text-align:center;color:#fff}.eyebrow
 .scan-page{max-width:550px;margin:8vh auto;background:#fff;border-radius:25px;padding:30px;text-align:center;box-shadow:0 20px 55px #0004}.scan-page h1{font-size:25px}.scan-page p{line-height:1.6;color:#475569}
 .hidden{display:none!important}.footnote{text-align:center;color:#dbeafe;font-size:12px;margin-top:16px}
 @media(max-width:850px){.qr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:430px){body{padding:12px}.qr-card{padding:12px 5px}.qr{width:135px;height:135px}.qr-card h2{font-size:15px}}
+
+/* Colorful decorative redesign; QR pixels remain black on white for easy scanning. */
+body{
+ background:
+  radial-gradient(circle at 8% 12%,#f472b6 0 7%,transparent 22%),
+  radial-gradient(circle at 92% 10%,#22d3ee 0 8%,transparent 24%),
+  radial-gradient(circle at 85% 88%,#a3e635 0 7%,transparent 23%),
+  radial-gradient(circle at 10% 90%,#fbbf24 0 8%,transparent 24%),
+  linear-gradient(135deg,#25105a 0%,#4338ca 42%,#0e7490 100%);
+ background-attachment:fixed;
+}
+header{
+ position:relative;padding:24px 18px 20px;border:1px solid #ffffff55;
+ border-radius:28px;background:linear-gradient(110deg,#ffffff20,#ffffff08);
+ box-shadow:0 18px 50px #09051f55;backdrop-filter:blur(12px);
+}
+header h1{color:#fff;text-shadow:0 4px 18px #0b102e88}
+.eyebrow{
+ display:inline-block;padding:7px 13px;border-radius:999px;
+ background:linear-gradient(90deg,#f472b6,#f59e0b,#22d3ee);
+ color:#201044;letter-spacing:.13em;
+}
+.qr-grid{gap:20px}
+.qr-card{
+ position:relative;overflow:hidden;isolation:isolate;
+ border:3px solid #ffffffd9;border-radius:28px;padding:20px 12px 18px;
+ box-shadow:0 18px 38px #09051f55,inset 0 0 0 1px #ffffffaa;
+ transition:transform .25s ease,box-shadow .25s ease;
+}
+.qr-card::before{
+ content:"✦  ✧  ✦";position:absolute;z-index:-1;top:8px;right:12px;
+ font-size:25px;letter-spacing:5px;opacity:.32;transform:rotate(12deg);
+}
+.qr-card::after{
+ content:"";position:absolute;z-index:-1;width:150px;height:150px;
+ border-radius:50%;right:-65px;bottom:-80px;background:#fff9;
+}
+.qr-card:hover{transform:translateY(-7px) rotate(-.5deg);box-shadow:0 25px 48px #09051f77}
+.qr-card h2{
+ display:inline-block;padding:8px 15px;border-radius:999px;color:#fff;
+ text-shadow:0 2px 5px #0004;box-shadow:0 5px 12px #0002;
+}
+.qr-card.blue{background:linear-gradient(145deg,#bfdbfe,#eff6ff 58%,#c4b5fd);border-color:#60a5fa}
+.qr-card.purple{background:linear-gradient(145deg,#f5d0fe,#faf5ff 58%,#c7d2fe);border-color:#c084fc}
+.qr-card.green{background:linear-gradient(145deg,#bbf7d0,#ecfdf5 58%,#a5f3fc);border-color:#34d399}
+.qr-card.orange{background:linear-gradient(145deg,#fed7aa,#fff7ed 58%,#fde68a);border-color:#fb923c}
+.qr-card.blue h2{background:linear-gradient(90deg,#2563eb,#4f46e5)}
+.qr-card.purple h2{background:linear-gradient(90deg,#9333ea,#db2777)}
+.qr-card.green h2{background:linear-gradient(90deg,#059669,#0d9488)}
+.qr-card.orange h2{background:linear-gradient(90deg,#ea580c,#eab308)}
+.qr{
+ position:relative;border:5px solid #fff;border-radius:20px;
+ box-shadow:0 9px 22px #1720332b;outline:2px solid #ffffffb8;
+ outline-offset:3px;padding:7px;
+}
+.qr img,.qr canvas{display:block}
+.controls button{box-shadow:0 7px 18px #0003;transition:transform .2s ease,filter .2s ease}
+.controls button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.reset{background:linear-gradient(90deg,#facc15,#fb923c);color:#422006}
+#projectorQuestion{box-shadow:0 22px 60px #0005}
+@media(max-width:850px){.qr-grid{gap:15px}}
+
+
+/* QR trang trí theo mẫu: hoa lá, khung hình học và mũ bảo hộ.
+   Phần mã vẫn là QR thật, nền trắng và màu đậm để camera dễ nhận diện. */
+.qr-card{
+ position:relative;
+ overflow:visible;
+ margin-top:8px;
+ border-radius:24px;
+ background:#fffdf8;
+ box-shadow:0 12px 28px #10152b30;
+}
+.qr-card h2{position:relative;z-index:2}
+.qr{
+ position:relative;
+ z-index:1;
+ width:184px;height:184px;
+ padding:9px;
+ margin:23px auto 18px;
+ background:#fff;
+ border:7px solid #fff;
+ border-radius:18px;
+ box-shadow:0 3px 0 #d9d4c8,0 8px 20px #20243a22;
+}
+.qr img{width:100%;height:auto;image-rendering:pixelated}
+.qr-card.blue{
+ background:
+  radial-gradient(circle at 12% 12%,#f7d7d0 0 5px,transparent 6px),
+  radial-gradient(circle at 88% 84%,#f6d77b 0 6px,transparent 7px),
+  #fffdf7;
+ border:5px solid #d6e5df;
+}
+.qr-card.blue::before{
+ content:"🌿  🌼  🌷";
+ position:absolute;top:3px;left:8px;right:8px;text-align:center;
+ font-size:22px;letter-spacing:7px;pointer-events:none;
+}
+.qr-card.blue::after{
+ content:"🌸  🍃  🌼";
+ position:absolute;bottom:0;left:8px;right:8px;text-align:center;
+ font-size:20px;letter-spacing:6px;pointer-events:none;
+}
+.qr-card.purple{
+ background:#fffdfb;
+ border:7px solid #f1e8dc;
+ border-radius:8px;
+}
+.qr-card.purple::before{
+ content:"✿  🌷  ✿  🌼";
+ position:absolute;top:4px;left:0;right:0;text-align:center;
+ color:#a79bd2;font-size:21px;letter-spacing:7px;
+}
+.qr-card.purple::after{
+ content:"🌷  ✿  🌸";
+ position:absolute;bottom:0;left:0;right:0;text-align:center;
+ font-size:20px;letter-spacing:8px;
+}
+.qr-card.green{
+ background:#fffaf0;
+ border:8px solid transparent;
+ border-image:repeating-linear-gradient(45deg,#e7a62e 0 7px,#fff1c7 7px 14px,#c94e2c 14px 18px) 8;
+ border-radius:5px;
+}
+.qr-card.green .qr{border-radius:3px;box-shadow:0 0 0 2px #edc16b}
+.qr-card.orange{
+ background:#fffdf8;
+ border:5px solid #5b1688;
+ border-radius:30px;
+ padding-top:34px;
+}
+.qr-card.orange::before{
+ content:"👷";
+ position:absolute;top:-38px;left:0;right:0;text-align:center;
+ font-size:54px;line-height:1.1;z-index:3;
+}
+.qr-card.orange .qr{
+ border:5px solid #f1c52f;
+ border-radius:14px;
+ box-shadow:0 0 0 3px #5b1688,0 8px 20px #25103b25;
+}
+.qr-card.orange .qr::after{
+ content:"";
+ position:absolute;inset:-12px;border:3px solid #f1c52f;
+ border-radius:18px;pointer-events:none;
+}
+.qr-card.used{opacity:.28;filter:grayscale(1)}
+@media(max-width:430px){
+ .qr{width:150px;height:150px}
+ .qr-card.orange::before{font-size:44px;top:-31px}
+}
+
+
+/* Trang trí toàn bộ VIỀN ngoài của từng mã QR, không chỉ khung trắng bên trong. */
+.qr-card .qr{
+  width:208px;
+  height:208px;
+  box-sizing:border-box;
+  padding:12px;
+  margin:28px auto 24px;
+  position:relative;
+  isolation:isolate;
+  background:#fff;
+  border:0;
+  border-radius:20px;
+  outline:0;
+}
+.qr-card .qr::before{
+  content:"";
+  position:absolute;
+  inset:-13px;
+  z-index:-1;
+  pointer-events:none;
+}
+.qr-card .qr::after{
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  font-size:23px;
+  line-height:1;
+  letter-spacing:3px;
+}
+/* Khung 1: viền lá và hoa chạy quanh bốn cạnh */
+.qr-card.blue .qr{
+  border:8px solid #dcebe3;
+  border-radius:28px;
+  box-shadow:0 0 0 3px #83aaa0,0 8px 18px #284b4540;
+}
+.qr-card.blue .qr::before{
+  inset:-23px;
+  border:5px solid #83aaa0;
+  border-radius:35px;
+  background:
+   radial-gradient(ellipse at 4% 12%,#e6a4a0 0 7px,transparent 8px),
+   radial-gradient(ellipse at 96% 18%,#e8c85d 0 7px,transparent 8px),
+   radial-gradient(ellipse at 5% 88%,#e6a4a0 0 7px,transparent 8px),
+   radial-gradient(ellipse at 95% 86%,#e8c85d 0 7px,transparent 8px);
+}
+.qr-card.blue .qr::after{
+  content:"🌿  🌼";
+  top:-28px;left:12px;right:12px;text-align:center;
+  text-shadow:0 1px 2px #fff;
+}
+/* Khung 2: viền kem, hoa nhỏ ở bốn góc */
+.qr-card.purple .qr{
+  border:9px solid #f5e9df;
+  border-radius:12px;
+  box-shadow:0 0 0 3px #c7b8dc,0 8px 18px #51436c35;
+}
+.qr-card.purple .qr::before{
+  inset:-19px;
+  border:4px solid #e6d8ca;
+  border-radius:16px;
+  background:
+   radial-gradient(circle at 0 0,#d99b9b 0 7px,transparent 8px),
+   radial-gradient(circle at 100% 0,#d99b9b 0 7px,transparent 8px),
+   radial-gradient(circle at 0 100%,#d99b9b 0 7px,transparent 8px),
+   radial-gradient(circle at 100% 100%,#d99b9b 0 7px,transparent 8px);
+}
+.qr-card.purple .qr::after{
+  content:"✿  🌷  ✿";
+  bottom:-29px;left:0;right:0;text-align:center;color:#9a83bb;
+}
+/* Khung 3: viền hoa văn hình học vàng cam bao kín mã */
+.qr-card.green .qr{
+  border:10px solid #fff8e6;
+  border-radius:5px;
+  box-shadow:0 0 0 4px #e2a32e,0 0 0 9px #fff0c6,0 8px 18px #794d1e35;
+}
+.qr-card.green .qr::before{
+  inset:-23px;
+  border:6px double #d98b20;
+  border-radius:7px;
+  background:repeating-conic-gradient(from 45deg at 50% 50%,#f4c45e 0 12deg,#fff5d9 12deg 24deg);
+  opacity:.9;
+}
+.qr-card.green .qr::after{
+  content:"◆  ✦  ◆";
+  top:-31px;left:0;right:0;text-align:center;color:#bd6a20;
+}
+/* Khung 4: viền kép tím-vàng bao quanh, mũ bảo hộ nằm phía trên */
+.qr-card.orange .qr{
+  border:9px solid #f2c52f;
+  border-radius:18px;
+  box-shadow:0 0 0 5px #5b1688,0 0 0 10px #f2c52f,0 10px 20px #32104745;
+}
+.qr-card.orange .qr::before{
+  inset:-25px;
+  border:5px solid #5b1688;
+  border-radius:28px;
+}
+.qr-card.orange .qr::after{
+  content:"✦  🟨  ✦";
+  bottom:-33px;left:0;right:0;text-align:center;color:#5b1688;
+}
+@media(max-width:430px){
+ .qr-card .qr{width:164px;height:164px;padding:9px}
+ .qr-card .qr::after{font-size:18px}
+}
+
 </style>
 </head>
 <body>
@@ -94,7 +354,13 @@ function createQRs(){
  const base=location.href.split("?")[0].split("#")[0];
  QUESTIONS.forEach(q=>{
   const url=base+"?scan="+encodeURIComponent(q.id)+"&room="+encodeURIComponent(ROOM);
-  new QRCode(document.getElementById("qr-"+q.id),{text:url,width:155,height:155,correctLevel:QRCode.CorrectLevel.H});
+  const qrColors={CH1:"#287f7b",CH2:"#7771b8",CH3:"#d78a18",CH4:"#58158a"};
+  new QRCode(document.getElementById("qr-"+q.id),{
+   text:url,width:155,height:155,
+   colorDark:qrColors[q.id]||"#172033",
+   colorLight:"#ffffff",
+   correctLevel:QRCode.CorrectLevel.H
+  });
  });
 }
 function handleScan(){
